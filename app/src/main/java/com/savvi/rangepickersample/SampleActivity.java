@@ -28,17 +28,14 @@ public class SampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample);
 
         final Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 10);
+        nextYear.add(Calendar.MONTH, 0);
 
         final Calendar lastYear = Calendar.getInstance();
-        lastYear.add(Calendar.YEAR, - 10);
+        lastYear.add(Calendar.DAY_OF_YEAR, -45);
 
         calendar = findViewById(R.id.calendar_view);
         button = findViewById(R.id.get_selected_dates);
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(2);
 
-        calendar.deactivateDates(list);
         ArrayList<Date> arrayList = new ArrayList<>();
         try {
             SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
@@ -55,10 +52,10 @@ public class SampleActivity extends AppCompatActivity {
         }
 
         calendar.init(lastYear.getTime(), nextYear.getTime(), new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
-                .inMode(CalendarPickerView.SelectionMode.RANGE) //
-                .withDeactivateDates(list)
-                .withSubTitles(getSubTitles())
-                .withHighlightedDates(arrayList);
+                .inMode(CalendarPickerView.SelectionMode.RANGE);//
+//                .withDeactivateDates(list)
+//                .withSubTitles(getSubTitles())
+//                .withHighlightedDates(arrayList);
 
         calendar.scrollToDate(new Date());
 
