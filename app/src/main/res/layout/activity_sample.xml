@@ -18,9 +18,36 @@
         android:scrollbarStyle="outsideOverlay"
         app:tsquare_dividerColor="@color/transparent"
         app:tsquare_headerTextColor="@color/custom_header_text"
+        app:tsquare_displayHeader="false"
         app:tsquare_orientation_horizontal="false"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        tools:layout_editor_absoluteY="0dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tvStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="18dp"
+        android:textColor="#670"
+        />
+
+    <TextView
+        android:id="@+id/tvEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="90dp"
+        android:textSize="18dp"
+        android:textColor="#076"
+        />
 
     <Button
         android:id="@+id/get_selected_dates"
@@ -28,6 +55,10 @@
         android:layout_height="wrap_content"
         android:text="Selected Dates"
         tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="447dp"/>
+        tools:layout_editor_absoluteY="447dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

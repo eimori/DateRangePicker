@@ -11,8 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/calendar_month_topmargin"
-        android:layout_marginBottom="@dimen/calendar_month_title_bottommargin"
-        android:gravity="center_horizontal" />
+        android:layout_marginBottom="22dp"
+        android:gravity="start|center"
+        android:text="123"
+        android:textSize="18sp"
+        />
 
     <com.savvi.rangedatepicker.CalendarGridView
         android:id="@+id/calendar_grid"

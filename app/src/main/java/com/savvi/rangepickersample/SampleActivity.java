@@ -3,6 +3,7 @@ package com.savvi.rangepickersample;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.savvi.rangedatepicker.CalendarPickerView;
@@ -21,6 +22,7 @@ public class SampleActivity extends AppCompatActivity {
 
     CalendarPickerView calendar;
     Button button;
+    TextView tvStart, tvEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class SampleActivity extends AppCompatActivity {
 
         calendar = findViewById(R.id.calendar_view);
         button = findViewById(R.id.get_selected_dates);
+        tvStart = findViewById(R.id.tvStart);
+        tvEnd = findViewById(R.id.tvEnd);
 
         ArrayList<Date> arrayList = new ArrayList<>();
         try {
@@ -58,6 +62,19 @@ public class SampleActivity extends AppCompatActivity {
 //                .withHighlightedDates(arrayList);
 
         calendar.scrollToDate(new Date());
+        calendar.setOnStartDateClickListener(new CalendarPickerView.OnDateClick() {
+            @Override
+            public void getDate(Date date) {
+                tvStart.setText(date.toString());
+            }
+        });
+
+        calendar.setOnEndDateClickListener(new CalendarPickerView.OnDateClick() {
+            @Override
+            public void getDate(Date date) {
+                tvEnd.setText(date.toString());
+            }
+        });
 
 
         button.setOnClickListener(new View.OnClickListener() {

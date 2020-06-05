@@ -8,7 +8,6 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +69,8 @@ public class CalendarPickerView extends RecyclerView {
     private final IndexedLinkedHashMap<String, List<List<MonthCellDescriptor>>> cells =
             new IndexedLinkedHashMap<>();
     final MonthView.Listener listener = new CellClickedListener();
+    private OnDateClick onStartDate = null;
+    private OnDateClick onEndDate = null;
     final List<MonthDescriptor> months = new ArrayList<>();
     final List<MonthCellDescriptor> selectedCells = new ArrayList<>();
     final List<MonthCellDescriptor> highlightedCells = new ArrayList<>();
@@ -607,7 +608,6 @@ public class CalendarPickerView extends RecyclerView {
                     clearOldSelections();
                 } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
                     // We're moving the start of the range back in time: clear the old start date.
-
                 }
                 break;
 
@@ -627,14 +627,17 @@ public class CalendarPickerView extends RecyclerView {
             if (selectedCells.size() == 0 || !selectedCells.get(0).equals(cell)) {
                 selectedCells.add(cell);
                 cell.setSelected(true);
+                onStartDate.getDate(cell.getDate());
             }
             selectedCals.add(newlySelectedCal);
 
             if (selectionMode == SelectionMode.RANGE && selectedCells.size() > 1) {
                 // Select all days in between start and end.
                 Date start = selectedCells.get(0).getDate();
+                onStartDate.getDate(start);
                 MonthCellDescriptor m1 = selectedCells.get(0);
                 Date end = selectedCells.get(1).getDate();
+                onEndDate.getDate(end);
                 MonthCellDescriptor m2 = selectedCells.get(1);
                 if (end.before(start)){
                     selectedCals.clear();
@@ -656,7 +659,9 @@ public class CalendarPickerView extends RecyclerView {
                         selectedCell.setRangeState(RangeState.NONE);
                     }
                     start = selectedCells.get(0).getDate();
+                    onStartDate.getDate(start);
                     end = selectedCells.get(1).getDate();
+                    onEndDate.getDate(end);
                 }
                 selectedCells.get(0).setRangeState(RangeState.FIRST);
                 selectedCells.get(1).setRangeState(RangeState.LAST);
@@ -1079,5 +1084,17 @@ public class CalendarPickerView extends RecyclerView {
         @Override
         public void onInvalidDateSelected(Date date) {
         }
+    }
+
+    public interface OnDateClick{
+        void getDate(Date date);
+    }
+
+    public void setOnStartDateClickListener(OnDateClick onDateClick){
+        this.onStartDate = onDateClick;
+    }
+
+    public void setOnEndDateClickListener(OnDateClick onDateClick){
+        this.onEndDate = onDateClick;
     }
 }
