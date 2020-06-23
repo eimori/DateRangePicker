@@ -228,8 +228,8 @@ public class CalendarPickerView extends RecyclerView {
         months.clear();
         minCal.setTime(minDate);
         maxCal.setTime(maxDate);
-        setMidnight(minCal);
-        setMidnight(maxCal);
+//        setMidnight(minCal);
+//        setMidnight(maxCal);
         displayOnly = false;
 
         // maxDate is exclusive: bump back to the previous day so if maxDate is the first of a month,
@@ -594,7 +594,7 @@ public class CalendarPickerView extends RecyclerView {
         Calendar newlySelectedCal = Calendar.getInstance(timeZone, locale);
         newlySelectedCal.setTime(date);
         // Sanitize input: clear out the hours/minutes/seconds/millis.
-        setMidnight(newlySelectedCal);
+//        setMidnight(newlySelectedCal);
 
         // Clear any remaining range state.
         for (MonthCellDescriptor selectedCell : selectedCells) {
@@ -643,11 +643,11 @@ public class CalendarPickerView extends RecyclerView {
                     selectedCals.clear();
 
                     newlySelectedCal.setTime(end);
-                    setMidnight(newlySelectedCal);
+//                    setMidnight(newlySelectedCal);
                     selectedCals.add((Calendar)newlySelectedCal.clone());
 
                     newlySelectedCal.setTime(start);
-                    setMidnight(newlySelectedCal);
+//                    setMidnight(newlySelectedCal);
                     selectedCals.add((Calendar)newlySelectedCal.clone());
 
 
